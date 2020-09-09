@@ -41,7 +41,7 @@ export const createUser = (req, res, next) => {
               data.password = req.body.password
               // send email
               // eslint-disable-next-line max-len
-              const activationUrl = `${process.env.SERVER_PROTOCOL}://${process.env.SERVER_NAME}:${process.env.SERVER_PORT}/user/activate/${data.activation_token}`
+              const activationUrl = `${process.env.PROTOCOL}://${process.env.HOST_NAME}:${process.env.PORT || 80}/user/activate/${data.activation_token}`
               await sendEmail(userObj.email, 'Account Activation', activationUrl)
                 .then((emailDetails) => {
                   // delete secured information

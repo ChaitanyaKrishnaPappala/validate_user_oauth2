@@ -36,10 +36,11 @@ app.get('/user/activate/:activation_token', activateUser)
 app.post('/user/login', app.oauth.grant(), login)
 app.post('/user/all', getAllUsers)
 app.put('/user/password', updateUserPassword)
+const port = process.env.PORT || 80
 
-app.listen(process.env.SERVER_PORT, (err) => {
+app.listen(port, (err) => {
   if (!err) {
-    console.log(`Server Running on port ${process.env.SERVER_PORT}`)
+    console.log(`Server Running on port ${port}`)
     initializeNodeMailer().then((resp) => {
       console.log(resp)
     }).catch((ex) => {
