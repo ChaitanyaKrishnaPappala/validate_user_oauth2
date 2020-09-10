@@ -114,6 +114,7 @@ export const getAllUsers = (req, res, next) => {
         return res.status(500).json({
           message: FAILED_TO_FETCH_USERS,
           error: ex.toString(),
+          local: process.env.LOCAL_TP_DATABASE_URL,
           url: process.env.DATABASE_URL
         })
       })

@@ -36,6 +36,11 @@ app.get('/user/activate/:activation_token', activateUser)
 app.post('/user/login', app.oauth.grant(), login)
 app.post('/user/all', getAllUsers)
 app.put('/user/password', updateUserPassword)
+app.get('/dbconfig', (req, res, next) => {
+  res.status(200).json({
+    env: process.env
+  })
+})
 const port = process.env.PORT || 80
 
 app.listen(port, (err) => {

@@ -1,6 +1,6 @@
 export const FAILED_TO_ACTIVATE_USER = 'Failed to activate user'
 export const FAILED_TO_REGISTER_USER = 'Failed to register user'
-export const FAILED_TO_FETCH_USERS = 'Failed to fetch users'
+export const FAILED_TO_FETCH_USERS = 'Failed to fetch users details'
 export const FAILED_TO_UPDATE_PASSWORD = 'Failed to update password'
 export const INVALID_AUTHORIZATION_TOKEN = 'Invalid Authorization token'
 export const USER_DETAILS_NOT_FOUND = 'Failed to retrieve user details'
