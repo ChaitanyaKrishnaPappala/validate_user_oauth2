@@ -4,8 +4,12 @@ import dotenv from 'dotenv'
 const {Pool} = pkg
 dotenv.config()
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL || process.env.LOCAL_TP_DATABASE_URL,
-  ssl: {rejectUnauthorized: false}
-})
+const poolObj = {
+  connectionString: process.env.DATABASE_URL || process.env.LOCAL_TP_DATABASE_URL
+}
+if (!process.env.LOCAL_TP_DATABASE_URL) {
+  poolObj.ssl = {rejectUnauthorized: false}
+}
+
+const pool = new Pool(poolObj)
 export default pool
