@@ -111,7 +111,11 @@ export const getAllUsers = (req, res, next) => {
       getAllUsersByKeysDAO(keys).then((data) => {
         return res.status(data ? 200 : 204).json({data})
       }).catch((ex) => {
-        return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
+        return res.status(500).json({
+          message: FAILED_TO_FETCH_USERS,
+          error: ex.toString(),
+          url: process.env.DATABASE_URL
+        })
       })
     } else {
       // validate authorization
@@ -124,17 +128,33 @@ export const getAllUsers = (req, res, next) => {
             getAllUsersByKeysDAO(keys).then((data) => {
               return res.status(data ? 200 : 204).json({data})
             }).catch((ex) => {
-              return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
+              return res.status(500).json({
+                message: FAILED_TO_FETCH_USERS,
+                error: ex.toString(),
+                url: process.env.DATABASE_URL
+              })
             })
           } else {
-            return res.status(400).json({message: FAILED_TO_FETCH_USERS, error: INVALID_AUTHORIZATION_TOKEN})
+            return res.status(400).json({
+              message: FAILED_TO_FETCH_USERS,
+              error: INVALID_AUTHORIZATION_TOKEN,
+              url: process.env.DATABASE_URL
+            })
           }
         }).catch((ex) => {
-          return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
+          return res.status(500).json({
+            message: FAILED_TO_FETCH_USERS,
+            error: ex.toString(),
+            url: process.env.DATABASE_URL
+          })
         })
     }
   } catch (ex) {
-    return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
+    return res.status(500).json({
+      message: FAILED_TO_FETCH_USERS,
+      error: ex.toString(),
+      url: process.env.DATABASE_URL
+    })
   }
 }
 
