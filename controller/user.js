@@ -113,26 +113,26 @@ export const getAllUsers = (req, res, next) => {
       }).catch((ex) => {
         return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
       })
+    } else {
+      // validate authorization
+      validateAuthorization(req.header('Authorization'))
+        .then((tokenObj) => {
+          if (tokenObj && tokenObj.user &&
+                tokenObj.user.id && tokenObj.accessToken) {
+            keys.push('last_name')
+            keys.push('email')
+            getAllUsersByKeysDAO(keys).then((data) => {
+              return res.status(data ? 200 : 204).json({data})
+            }).catch((ex) => {
+              return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
+            })
+          } else {
+            return res.status(400).json({message: FAILED_TO_FETCH_USERS, error: INVALID_AUTHORIZATION_TOKEN})
+          }
+        }).catch((ex) => {
+          return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
+        })
     }
-
-    // validate authorization
-    validateAuthorization(req.header('Authorization'))
-      .then((tokenObj) => {
-        if (tokenObj && tokenObj.user &&
-              tokenObj.user.id && tokenObj.accessToken) {
-          keys.push('last_name')
-          keys.push('email')
-          getAllUsersByKeysDAO(keys).then((data) => {
-            return res.status(data ? 200 : 204).json({data})
-          }).catch((ex) => {
-            return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
-          })
-        } else {
-          return res.status(400).json({message: FAILED_TO_FETCH_USERS, error: INVALID_AUTHORIZATION_TOKEN})
-        }
-      }).catch((ex) => {
-        return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
-      })
   } catch (ex) {
     return res.status(500).json({message: FAILED_TO_FETCH_USERS, error: ex.toString()})
   }

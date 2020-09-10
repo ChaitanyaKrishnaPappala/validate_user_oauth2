@@ -5,10 +5,7 @@ const {Pool} = pkg
 dotenv.config()
 
 const pool = new Pool({
-  user: process.env.POSTGRES_USER,
-  host: process.env.POSTGRES_APP_HOST,
-  database: process.env.POSTGRES_NAME,
-  password: process.env.POSTGRES_PASSWORD,
-  port: process.env.POSTGRES_PORT
+  connectionString: process.env.DATABASE_URL || process.env.LOCAL_DATABASE_URL,
+  ssl: !!process.env.DATABASE_URL
 })
 export default pool
