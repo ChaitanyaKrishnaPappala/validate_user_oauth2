@@ -115,9 +115,7 @@ export const getAllUsers = (req, res, next) => {
       }).catch((ex) => {
         return res.status(500).json({
           message: FAILED_TO_FETCH_USERS,
-          error: ex.toString(),
-          local: process.env.LOCAL_TP_DATABASE_URL,
-          url: process.env.DATABASE_URL
+          error: ex.toString()
         })
       })
     } else {
@@ -133,30 +131,26 @@ export const getAllUsers = (req, res, next) => {
             }).catch((ex) => {
               return res.status(500).json({
                 message: FAILED_TO_FETCH_USERS,
-                error: ex.toString(),
-                url: process.env.DATABASE_URL
+                error: ex.toString()
               })
             })
           } else {
             return res.status(400).json({
               message: FAILED_TO_FETCH_USERS,
-              error: INVALID_AUTHORIZATION_TOKEN,
-              url: process.env.DATABASE_URL
+              error: INVALID_AUTHORIZATION_TOKEN
             })
           }
         }).catch((ex) => {
           return res.status(500).json({
             message: FAILED_TO_FETCH_USERS,
-            error: ex.toString(),
-            url: process.env.DATABASE_URL
+            error: ex.toString()
           })
         })
     }
   } catch (ex) {
     return res.status(500).json({
       message: FAILED_TO_FETCH_USERS,
-      error: ex.toString(),
-      url: process.env.DATABASE_URL
+      error: ex.toString()
     })
   }
 }
