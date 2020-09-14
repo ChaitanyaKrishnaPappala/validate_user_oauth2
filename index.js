@@ -52,7 +52,7 @@ const port = process.env.PORT || 80
 
 app.listen(port, (err) => {
   if (!err) {
-    console.log(`Server Running on port ${port}`)
+    console.log(`Server Running on port - ${port}`)
     initializeNodeMailer().then((resp) => {
       console.log(resp)
     }).catch((ex) => {
